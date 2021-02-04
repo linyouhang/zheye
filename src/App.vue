@@ -1,15 +1,24 @@
 <template>
   <div class="container">
     <global-header :user="userData"></global-header>
-    <column-list :list="list"></column-list>
+    <!-- <column-list :list="list"></column-list> -->
+    <validate-form @form-submit="submitForm">
+      <label>email</label>
+      <validate-input :rules="rules" v-model="emalival" type='text'></validate-input>
+      <template #submit>
+        <span class="btn btn-danger">submit</span>
+      </template>
+    </validate-form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ColumnList, { ColumnProps } from './components/ColumnList.vue'
 import GlobalHeader, { HeaderProps } from './components/GlobalHeadr.vue'
+import ValidateInput from './components/ValidateInput.vue'
+import validateForm from './components/ValidateForm.vue'
 const userData: HeaderProps = {
   isLogin: true,
   name: 'ling'
@@ -43,13 +52,23 @@ const testData: ColumnProps[] = [
 export default defineComponent({
   name: 'App',
   components: {
-    ColumnList,
-    GlobalHeader
+    // ColumnList,
+    GlobalHeader,
+    ValidateInput,
+    validateForm
   },
   setup () {
+    const emalival = ref('lingyou')
+    const rules = [{ type: 'required', message: '请填写邮箱' }, { type: 'email', message: '邮箱格式不正确' }]
+    const submitForm = (result: boolean) => {
+      console.log('result', result)
+    }
     return {
       list: testData,
-      userData
+      userData,
+      rules,
+      emalival,
+      submitForm
     }
   }
 })
