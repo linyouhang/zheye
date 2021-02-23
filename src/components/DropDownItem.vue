@@ -1,7 +1,7 @@
 <template>
-  <a :href="to" class="dropdown-item" :class="{'is-disabled': disabled}">
+  <router-link :to="to" class="dropdown-item" :class="{'is-disabled': disabled}">
     <slot></slot>
-  </a>
+  </router-link>
 </template>
 
 <script lang='ts'>

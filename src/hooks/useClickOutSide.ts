@@ -1,6 +1,4 @@
-import { onMounted, Ref } from "vue";
-
-import { ref,onUnmounted } from 'vue'
+import { ref, onUnmounted, onMounted, Ref } from 'vue'
 const useClickOutSide = (element: Ref<HTMLElement | null>) => {
   const isClickOutSide = ref(false)
   const handel = (e: MouseEvent) => {
